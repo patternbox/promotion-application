@@ -1,6 +1,5 @@
 package com.patternbox.promotion.hexagonal.domain;
 
-public enum GameCategory {
+public class PromotionMessage implements Message {
 
-	SINGLE_PLAYER, MULTI_PLAYER;
 }

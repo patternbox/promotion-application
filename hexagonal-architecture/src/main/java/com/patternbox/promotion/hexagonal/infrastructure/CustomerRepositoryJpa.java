@@ -8,7 +8,7 @@ import com.patternbox.promotion.hexagonal.domain.GameCategory;
 
 public class CustomerRepositoryJpa implements CustomerRepository {
 
-	public Collection<Customer> findCustomerByInterest(GameCategory category) {
+	public Collection<Customer> findCustomersByInterest(GameCategory category) {
 		// TODO Auto-generated method stub
 		return null;
 	}

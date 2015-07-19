@@ -4,6 +4,6 @@ import java.util.Collection;
 
 public interface CustomerRepository {
 	
-	Collection<Customer> findCustomerByInterest(GameCategory category);
+	Collection<Customer> findCustomersByInterest(GameCategory interest);
 
 }
