@@ -1,4 +1,4 @@
-package com.patternbox.promotion.hexagonal.domain;
+package com.patternbox.promotion.layered.domain;
 
 public interface Message {
 	

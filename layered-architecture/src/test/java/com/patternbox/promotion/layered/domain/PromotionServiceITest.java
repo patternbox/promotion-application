@@ -34,6 +34,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 
+import com.patternbox.promotion.layered.persistence.GameCategory;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
@@ -58,8 +59,8 @@ public class PromotionServiceITest {
 	@Deployment
 	public static JavaArchive createDeployment() {
 		// create Java archive
-		return ShrinkWrap.create(JavaArchive.class, "promotion.jar")
-				.addPackages(true /* recursive */, "com.patternbox.promotion")
+		return ShrinkWrap.create(JavaArchive.class, "promotion-layered.jar")
+				.addPackages(true /* recursive */, "com.patternbox.promotion.layered")
 				.addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
@@ -75,6 +76,7 @@ public class PromotionServiceITest {
 	@Test
 	@InSequence(1)
 	public void findCustomers() {
+		promotionService.sendPromotions("", GameCategory.BOARD_GAMES);
 	}
 
 	@Test

@@ -2,6 +2,6 @@ package com.patternbox.promotion.layered.persistence;
 
 public enum GameCategory {
 	
-	SINGLE_PLAYER, MULTI_PLAYER;
+	CARD_GAMES, BOARD_GAMES, PARTY_GAMES;
 
 }

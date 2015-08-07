@@ -27,20 +27,37 @@ package com.patternbox.promotion.hexagonal.infrastructure;
 import static org.junit.Assert.assertNotNull;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Integration test for {@link CustomerRepositoryJpa} using Arquillian.
  * 
  * @author Dirk Ehms
  */
+@RunWith(Arquillian.class)
 public class CustomerRepositoryJpaITest {
 
-	@EJB
+	@Inject
 	private CustomerRepositoryJpa customerRepo;
+
+	@Deployment
+	public static JavaArchive createDeployment() {
+		// create Java archive
+		return ShrinkWrap.create(JavaArchive.class, "promotion-hexagonal.jar")
+				.addPackages(true /* recursive */, "com.patternbox.promotion.hexagonal")
+				.addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+	}
 
 	/**
 	 * Check dependency injection before running tests.
