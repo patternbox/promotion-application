@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>monolith-architecture</module>
         <module>layered-architecture</module>
         <module>hexagonal-architecture</module>
     </modules>
