@@ -15,7 +15,8 @@ public class CustomerRepositoryJpa implements CustomerRepository {
 	private EntityManager em;
 
 	public Collection<Customer> findCustomersByInterest(GameCategory interest) {
-        return em.createNamedQuery("findAll", Customer.class).getResultList();
+        return em.createNamedQuery("findByInterest", Customer.class)
+        		.setParameter("interest", interest)
+        		.getResultList();
 	}
-
 }

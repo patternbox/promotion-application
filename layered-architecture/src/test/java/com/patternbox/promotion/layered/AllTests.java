@@ -29,10 +29,8 @@ import org.junit.runners.Suite;
 
 import com.patternbox.promotion.layered.domain.PromotionServiceITest;
 
-
-
 /**
- * Test suite to run all tests from IDE.
+ * Test suite to run all tests from the IDE.
  * 
  * @author Dirk Ehms
  */

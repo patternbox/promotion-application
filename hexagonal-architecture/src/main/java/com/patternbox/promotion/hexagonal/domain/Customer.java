@@ -1,27 +1,31 @@
 package com.patternbox.promotion.hexagonal.domain;
 
-import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "findAll", query = "SELECT c FROM Customer c")
+	@NamedQuery(name = "findByInterest", query = "SELECT c FROM Customer c WHERE c.interest = :interest")
 })
 public class Customer {
 
 	@Id
 	private Long id;
 	
+	@NotNull
 	private String email;
 	
 	private String surname;
 	
 	private String firstName;
 	
-	private Set<GameCategory> interests;
+    @Enumerated(EnumType.STRING)
+    private GameCategory interest;
 
 	public String getEmail() {
 		return email;
@@ -35,7 +39,7 @@ public class Customer {
 		return firstName;
 	}
 
-	public Set<GameCategory> getInterests() {
-		return interests;
+	public GameCategory getInterest() {
+		return interest;
 	}
 }

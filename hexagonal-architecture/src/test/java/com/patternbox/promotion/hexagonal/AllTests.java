@@ -31,13 +31,13 @@ import com.patternbox.promotion.hexagonal.domain.PromotionServiceTest;
 import com.patternbox.promotion.hexagonal.infrastructure.CustomerRepositoryJpaITest;
 
 /**
- * Test suite to run all tests from IDE.
+ * Test suite to run all tests from the IDE.
  * 
  * @author Dirk Ehms
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-// Unit tests
+		// Unit tests
 		PromotionServiceTest.class,
 		// Integration tests
 		CustomerRepositoryJpaITest.class })

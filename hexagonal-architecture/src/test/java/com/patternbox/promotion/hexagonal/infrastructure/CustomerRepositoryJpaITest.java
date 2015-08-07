@@ -26,18 +26,22 @@ package com.patternbox.promotion.hexagonal.infrastructure;
 
 import static org.junit.Assert.assertNotNull;
 
-import javax.ejb.EJB;
+import java.util.Collection;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.junit.InSequence;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.patternbox.promotion.hexagonal.domain.Customer;
+import com.patternbox.promotion.hexagonal.domain.GameCategory;
 
 /**
  * Integration test for {@link CustomerRepositoryJpa} using Arquillian.
@@ -68,13 +72,9 @@ public class CustomerRepositoryJpaITest {
 	}
 
 	@Test
-	@InSequence(1)
-	public void findCustomers() {
-	}
-
-	@Test
-	@InSequence(2)
 	public void findCustomersByInterest() {
+		Collection<Customer> customers = customerRepo.findCustomersByInterest(GameCategory.BOARD_GAMES);
+		Assert.assertTrue(customers.isEmpty());
 	}
 
 }

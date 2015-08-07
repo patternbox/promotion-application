@@ -22,19 +22,13 @@ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGE.
  ******************************************************************************/
-package com.patternbox.promotion.layered.domain;
+package com.patternbox.promotion.hexagonal.infrastructure;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-import java.util.Arrays;
-import java.util.List;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
-import com.patternbox.promotion.layered.persistence.GameCategory;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
@@ -45,22 +39,24 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.patternbox.promotion.hexagonal.domain.Message;
+
 /**
- * Integration test for {@link PromotionService} using Arquillian.
+ * Integration test for {@link MessageServiceEmail} using Arquillian.
  * 
  * @author Dirk Ehms
  */
 @RunWith(Arquillian.class)
-public class PromotionServiceITest {
+public class MessageServiceEmailITest {
 
-	@EJB
-	private PromotionService promotionService;
+	@Inject
+	private MessageServiceEmail messageService;
 
 	@Deployment
 	public static JavaArchive createDeployment() {
 		// create Java archive
-		return ShrinkWrap.create(JavaArchive.class, "promotion-layered.jar")
-				.addPackages(true /* recursive */, "com.patternbox.promotion.layered")
+		return ShrinkWrap.create(JavaArchive.class, "promotion-hexagonal.jar")
+				.addPackages(true /* recursive */, "com.patternbox.promotion.hexagonal")
 				.addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
@@ -70,18 +66,30 @@ public class PromotionServiceITest {
 	 */
 	@Before
 	public void setUp() {
-		assertNotNull(promotionService);
+		assertNotNull(messageService);
 	}
 
 	@Test
-	@InSequence(1)
-	public void findCustomers() {
-		promotionService.sendPromotions(GameCategory.BOARD_GAMES);
-	}
+	public void sendMessage() {
+		
+		Message message = new Message() {
 
-	@Test
-	@InSequence(2)
-	public void findCustomersByInterest() {
+			@Override
+			public String recipient() {
+				return "abc@gmx.de";
+			}
+
+			@Override
+			public String subject() {
+				return "test subject";
+			}
+
+			@Override
+			public String body() {
+				return "test message";
+			}};
+		
+		messageService.sendMessage(message);
 	}
 
 }

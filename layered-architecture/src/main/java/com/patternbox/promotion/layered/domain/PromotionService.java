@@ -13,13 +13,17 @@ public class PromotionService {
 	@Inject
 	private CustomerDAO customerDAO;
 	
-	public void sendPromotions(String template, GameCategory category) {
-		for (Customer customer: customerDAO.findCustomers()) {
-			// send a message
+	@Inject
+	private MessageService messageService;
+	
+	public void sendPromotions(GameCategory category) {
+		for (Customer customer: customerDAO.findCustomersByInterest(category)) {
+			messageService.sendMessage(createMessage(customer));
 		}
 	}
 
 	public Message createMessage(final Customer customer) {
+		
 		return new Message() {
 
 			@Override
