@@ -30,6 +30,6 @@ public class PromotionServiceTest {
 	@Test
 	public void sendPromotion_NoMatchingCustomers_NothingSent() {
 		PromotionService promotionService = new PromotionService(messageService, customerRepository);
-		promotionService.sendPromotions(GameCategory.CARD_GAMES);
+		promotionService.sendPromotions(GameCategory.CARD_GAME);
 	}
 }

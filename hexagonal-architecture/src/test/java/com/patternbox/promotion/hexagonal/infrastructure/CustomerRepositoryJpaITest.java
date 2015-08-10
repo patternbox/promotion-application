@@ -73,7 +73,7 @@ public class CustomerRepositoryJpaITest {
 
 	@Test
 	public void findCustomersByInterest() {
-		Collection<Customer> customers = customerRepo.findCustomersByInterest(GameCategory.BOARD_GAMES);
+		Collection<Customer> customers = customerRepo.findCustomersByInterest(GameCategory.BOARD_GAME);
 		Assert.assertTrue(customers.isEmpty());
 	}
 

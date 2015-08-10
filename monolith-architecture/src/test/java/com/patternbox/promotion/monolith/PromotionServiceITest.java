@@ -78,7 +78,7 @@ public class PromotionServiceITest {
 	@Test
 	@InSequence(1)
 	public void findCustomers() {
-		promotionService.sendPromotions(GameCategory.BOARD_GAMES);
+		promotionService.sendPromotions(GameCategory.BOARD_GAME);
 	}
 
 	@Test

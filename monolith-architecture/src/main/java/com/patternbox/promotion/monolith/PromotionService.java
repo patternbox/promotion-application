@@ -1,6 +1,7 @@
 package com.patternbox.promotion.monolith;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -15,20 +16,31 @@ public class PromotionService {
 
 	@Inject
 	private MessageService messageService;
-	
+
+	public void sendPromotions2(GameCategory category) {
+
+		List<Customer> customers = em.createNamedQuery("findByInterest", Customer.class)
+				.setParameter("interest", category)
+				.getResultList();
+
+		for (Customer customer: customers) {
+			messageService.sendMessage(createMessage(customer));
+		}
+	}
+
 	public void sendPromotions(GameCategory category) {
 		for (Customer customer: findCustomersByInterest(category)) {
 			messageService.sendMessage(createMessage(customer));
 		}
 	}
 
-	public Collection<Customer> findCustomersByInterest(GameCategory interest) {
+	Collection<Customer> findCustomersByInterest(GameCategory interest) {
         return em.createNamedQuery("findByInterest", Customer.class)
         		.setParameter("interest", interest)
         		.getResultList();
 	}
 	
-	public Message createMessage(final Customer customer) {
+	Message createMessage(final Customer customer) {
 		
 		return new Message() {
 

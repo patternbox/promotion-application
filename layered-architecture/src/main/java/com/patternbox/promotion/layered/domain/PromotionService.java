@@ -22,7 +22,7 @@ public class PromotionService {
 		}
 	}
 
-	public Message createMessage(final Customer customer) {
+	Message createMessage(final Customer customer) {
 		
 		return new Message() {
 
